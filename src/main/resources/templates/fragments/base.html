@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="id" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Jadwal Sholat & Imsak" />
+    <meta name="keywords" content="Jadwal, Sholat, Imsak, 2023" />
+    <title>Al-Quran Online | Irvanudin</title>
+    <link rel="icon" type="image/x-icon" th:href="@{/favicon.ico}" />
+    <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/webjars/font-awesome/6.3.0/css/all.min.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-dark bg-success">
+      <div class="container">
+        <a class="navbar-brand m-0 h1" href="/">Al-Qur'an Online</a>
+      </div>
+    </nav>
+    <div class="container my-4">
+      <div th:replace="${content} :: content"></div>
+    </div>
+  </body>
+</html>

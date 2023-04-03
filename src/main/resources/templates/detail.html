@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="id" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Jadwal Sholat & Imsak" />
+    <meta name="keywords" content="Jadwal, Sholat, Imsak, 2023" />
+    <title>Al-Quran Online | Irvanudin</title>
+    <link rel="icon" type="image/x-icon" th:href="@{/favicon.ico}" />
+    <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/webjars/font-awesome/6.3.0/css/all.min.css" />
+  </head>
+  <body>
+    <!-- Head -->
+    <nav class="navbar navbar-dark bg-success">
+      <div class="container">
+        <a class="navbar-brand m-0 h1" href="/">Al-Qur'an Online</a>
+      </div>
+    </nav>
+    <div class="container my-4">
+      <div class="card p-4 text-center shadow-sm">
+        <b
+          ><div
+            class="fs-3"
+            th:text="${detail.data.namaLatin} + ' • ' + ${detail.data.nama}"
+          ></div
+        ></b>
+        <div
+          th:text="${detail.data.tempatTurun} + ' • ' + ${detail.data.arti} + ' • ' + ${detail.data.jumlahAyat} + ' Ayat'"
+        ></div>
+      </div>
+      <div class="card p-4 text-center shadow-sm my-2">
+        <div class="fs-3">بِسْمِ اللهِ الرَّحْمَنِ الرَّحِيْمِ</div>
+      </div>
+      <div class="card p-4 shadow-sm my-2" th:each="ayat : ${detail.data.ayat}">
+        <div th:text="${detail.data.nomor} + ' : ' + ${ayat.nomorAyat}"></div>
+        <div class="fs-3 text-end my-2" th:text="${ayat.teksArab}"></div>
+        <div th:text="${ayat.teksLatin}"></div>
+        <hr style="margin: 2px" />
+        <div th:text="${ayat.teksIndonesia}"></div>
+      </div>
+      <div class="card p-4 shadow-sm my-2">
+        <th:block th:unless="${detail.data.suratSebelumnya}">
+          <a href="#" class="fs-3">
+            <button
+              type="button"
+              class="btn btn-primary"
+              th:text="${detail.data.suratSebelumnya.namaLatin} + ' - ' + ${detail.data.suratSebelumnya.nama}"
+            ></button
+          ></a>
+        </th:block>
+      </div>
+    </div>
+  </body>
+</html>

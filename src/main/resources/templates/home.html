@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="id" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Jadwal Sholat & Imsak" />
+    <meta name="keywords" content="Jadwal, Sholat, Imsak, 2023" />
+    <title>Al-Quran Online | Irvanudin</title>
+    <link rel="icon" type="image/x-icon" th:href="@{/favicon.ico}" />
+    <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/webjars/font-awesome/6.3.0/css/all.min.css" />
+  </head>
+  <body>
+    <!-- Head -->
+    <nav class="navbar navbar-dark bg-success">
+      <div class="container">
+        <a class="navbar-brand m-0 h1" href="/">Al-Qur'an Online</a>
+      </div>
+    </nav>
+    <div class="container my-4">
+      <div class="row row-cols-3">
+        <div class="col my-2" th:each="surat : ${surat.data}">
+          <div
+            class="card shadow-sm p-2 clickable hoverable transition bg-light"
+          >
+            <div th:text="${surat.nomor} + '. ' + ${surat.namaLatin}"></div>
+            <div class="text-end fs-2" th:text="${surat.nama}"></div>
+            <div
+              class="text-end"
+              th:text="${surat.tempatTurun} + ' - ' + ${surat.arti}"
+            ></div>
+            <a th:href="'/detail/' + ${surat.nomor}" class="stretched-link"></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
