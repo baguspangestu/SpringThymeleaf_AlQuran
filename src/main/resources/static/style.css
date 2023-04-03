@@ -1,0 +1,56 @@
+@font-face {
+  font-family: "Quicksand";
+  src: url("fonts/Quicksand-Light.ttf");
+  font-style: normal;
+  font-weight: 300; /* untuk varian light */
+}
+
+@font-face {
+  font-family: "Quicksand";
+  src: url("fonts/Quicksand-Regular.ttf");
+  font-style: normal;
+  font-weight: 400; /* untuk varian normal */
+}
+
+@font-face {
+  font-family: "Quicksand";
+  src: url("fonts/Quicksand-Medium.ttf");
+  font-style: normal;
+  font-weight: 500; /* untuk varian medium */
+}
+
+@font-face {
+  font-family: "Quicksand";
+  src: url("fonts/Quicksand-SemiBold.ttf");
+  font-style: normal;
+  font-weight: 600; /* untuk varian semibold */
+}
+
+@font-face {
+  font-family: "Quicksand";
+  src: url("fonts/Quicksand-Bold.ttf");
+  font-style: normal;
+  font-weight: 700; /* untuk varian bold */
+}
+
+@font-face {
+  font-family: "ScheherazadeNew";
+  src: url("fonts/ScheherazadeNew-Regular.ttf");
+  font-style: normal;
+  font-weight: 400; /* untuk varian normal */
+}
+
+@font-face {
+  font-family: "ScheherazadeNew";
+  src: url("fonts/ScheherazadeNew-Bold.ttf");
+  font-style: normal;
+  font-weight: 700; /* untuk varian bold */
+}
+
+body {
+  font-family: "Quicksand";
+}
+
+.ayat {
+  font-family: "ScheherazadeNew";
+}
