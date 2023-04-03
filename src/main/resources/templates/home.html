@@ -46,7 +46,10 @@
           th:each="surat : ${surat.data}"
         >
           <div class="card shadow-sm p-2 bg-light hover">
-            <div th:text="${surat.nomor} + '. ' + ${surat.namaLatin}"></div>
+            <div
+              class="fw-semibold"
+              th:text="${surat.nomor} + '. ' + ${surat.namaLatin}"
+            ></div>
             <div
               class="text-end fs-2 ayat fw-bold"
               th:text="${surat.nama}"

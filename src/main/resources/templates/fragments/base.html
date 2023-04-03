@@ -9,15 +9,27 @@
     <link rel="icon" type="image/x-icon" th:href="@{/favicon.ico}" />
     <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css" />
     <link rel="stylesheet" href="/webjars/font-awesome/6.3.0/css/all.min.css" />
+    <link rel="stylesheet" th:href="@{/style.css}" />
   </head>
   <body>
-    <nav class="navbar navbar-dark bg-success">
+    <!-- Head -->
+    <nav class="navbar navbar-dark bg-success sticky-top">
       <div class="container">
-        <a class="navbar-brand m-0 h1" href="/">Al-Qur'an Online</a>
+        <a class="navbar-brand m-0 h1 fw-bold" href="/"
+          ><i class="fa-solid fa-book-quran"></i> Al-Qur'an Online</a
+        >
       </div>
     </nav>
+    <!-- Content -->
     <div class="container my-4">
       <div th:replace="${content} :: content"></div>
     </div>
+    <!-- Footer -->
+    <footer
+      class="text-center sticky-bottom p-3"
+      style="background-color: #d1e7dd"
+    >
+      © 2023 Sistem Informasi - Irvanudin
+    </footer>
   </body>
 </html>
