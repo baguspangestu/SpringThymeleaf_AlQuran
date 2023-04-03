@@ -12,13 +12,16 @@
   </head>
   <body>
     <!-- Head -->
-    <nav class="navbar navbar-dark bg-success">
+    <nav class="navbar navbar-dark bg-success sticky-top">
       <div class="container">
-        <a class="navbar-brand m-0 h1" href="/">Al-Qur'an Online</a>
+        <a class="navbar-brand m-0 h1" href="/"
+          ><i class="fa-solid fa-book-quran"></i> Al-Qur'an Online</a
+        >
       </div>
     </nav>
+    <!-- Content -->
     <div class="container my-4">
-      <div class="card p-4 text-center shadow-sm">
+      <div class="card p-2 text-center shadow-sm">
         <b
           ><div
             class="fs-3"
@@ -29,17 +32,17 @@
           th:text="${detail.data.tempatTurun} + ' • ' + ${detail.data.arti} + ' • ' + ${detail.data.jumlahAyat} + ' Ayat'"
         ></div>
       </div>
-      <div class="card p-4 text-center shadow-sm my-2">
+      <div class="card p-2 text-center shadow-sm my-2">
         <div class="fs-3">بِسْمِ اللهِ الرَّحْمَنِ الرَّحِيْمِ</div>
       </div>
-      <div class="card p-4 shadow-sm my-2" th:each="ayat : ${detail.data.ayat}">
+      <div class="card p-2 shadow-sm my-2" th:each="ayat : ${detail.data.ayat}">
         <div th:text="${detail.data.nomor} + ' : ' + ${ayat.nomorAyat}"></div>
         <div class="fs-3 text-end my-2" th:text="${ayat.teksArab}"></div>
         <div th:text="${ayat.teksLatin}"></div>
         <hr style="margin: 2px" />
         <div th:text="${ayat.teksIndonesia}"></div>
       </div>
-      <div class="card p-4 shadow-sm my-2">
+      <div class="card p-2 shadow-sm my-2">
         <th:block th:unless="${detail.data.suratSebelumnya}">
           <a href="#" class="fs-3">
             <button
@@ -51,5 +54,12 @@
         </th:block>
       </div>
     </div>
+    <!-- Footer -->
+    <footer
+      class="text-lg-start sticky-bottom p-3"
+      style="background-color: #d1e7dd"
+    >
+      <div class="text-center">© 2023 Sistem Informasi - Irvanudin</div>
+    </footer>
   </body>
 </html>

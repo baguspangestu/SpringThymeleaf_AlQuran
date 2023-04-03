@@ -12,17 +12,21 @@
   </head>
   <body>
     <!-- Head -->
-    <nav class="navbar navbar-dark bg-success">
+    <nav class="navbar navbar-dark bg-success sticky-top">
       <div class="container">
-        <a class="navbar-brand m-0 h1" href="/">Al-Qur'an Online</a>
+        <a class="navbar-brand m-0 h1" href="/"
+          ><i class="fa-solid fa-book-quran"></i> Al-Qur'an Online</a
+        >
       </div>
     </nav>
+    <!-- Content -->
     <div class="container my-4">
-      <div class="row row-cols-3">
-        <div class="col my-2" th:each="surat : ${surat.data}">
-          <div
-            class="card shadow-sm p-2 clickable hoverable transition bg-light"
-          >
+      <div class="row">
+        <div
+          class="col-12 col-sm-6 col-md-4 g-2"
+          th:each="surat : ${surat.data}"
+        >
+          <div class="card shadow-sm p-2 bg-light hover">
             <div th:text="${surat.nomor} + '. ' + ${surat.namaLatin}"></div>
             <div class="text-end fs-2" th:text="${surat.nama}"></div>
             <div
@@ -34,5 +38,12 @@
         </div>
       </div>
     </div>
+    <!-- Footer -->
+    <footer
+      class="text-lg-start sticky-bottom p-3"
+      style="background-color: #d1e7dd"
+    >
+      <div class="text-center">© 2023 Sistem Informasi - Irvanudin</div>
+    </footer>
   </body>
 </html>
