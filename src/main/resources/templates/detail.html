@@ -42,15 +42,31 @@
         <div th:text="${ayat.teksIndonesia}"></div>
       </div>
       <div class="card p-2 shadow-sm mb-2">
-        <th:block th:unless="${detail.data.suratSebelumnya}">
-          <a href="#" class="fs-3">
-            <button
+        <div class="d-flex justify-content-between">
+          <th:block th:if="${detail.data.suratSebelumnya}">
+            <a
               type="button"
-              class="btn btn-primary"
-              th:text="${detail.data.suratSebelumnya.namaLatin} + ' • ' + ${detail.data.suratSebelumnya.nama}"
-            ></button
-          ></a>
-        </th:block>
+              class="btn btn-success"
+              th:href="'/detail/' + ${detail.data.suratSebelumnya.nomor}"
+              ><i class="fa-solid fa-left-long"></i>
+              <span
+                th:text="${detail.data.suratSebelumnya.namaLatin} + ' • ' + ${detail.data.suratSebelumnya.nama}"
+              ></span
+            ></a>
+          </th:block>
+          <div></div>
+          <th:block th:if="${detail.data.suratSelanjutnya}">
+            <a
+              type="button"
+              class="btn btn-success"
+              th:href="'/detail/' + ${detail.data.suratSelanjutnya.nomor}"
+              ><span
+                th:text="${detail.data.suratSelanjutnya.namaLatin} + ' • ' + ${detail.data.suratSelanjutnya.nama}"
+              ></span>
+              <i class="fa-solid fa-right-long"></i>
+            </a>
+          </th:block>
+        </div>
       </div>
     </div>
     <!-- Footer -->
@@ -60,5 +76,15 @@
     >
       © 2023 Sistem Informasi - Irvanudin
     </footer>
+    <!-- Back to top -->
+    <button
+      id="back-to-top"
+      class="btn btn-success btn-back-to-top"
+      title="Kembali ke atas"
+    >
+      <i class="fas fa-chevron-up"></i>
+    </button>
+    <!-- Script -->
+    <script th:src="@{/script.js}"></script>
   </body>
 </html>

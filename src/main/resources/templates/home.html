@@ -22,7 +22,7 @@
     </nav>
     <!-- Content -->
     <div class="container my-4">
-      <div class="card p-2 text-center shadow-sm mb-2">
+      <div class="card p-2 text-center mb-2">
         <div class="fs-2 ayat p-2 fw-bold">
           بِسْمِ اللهِ الرَّحْمَنِ الرَّحِيْمِ
         </div>
@@ -42,12 +42,12 @@
       </div>
       <div class="row px-2">
         <div
-          class="col-12 col-sm-6 col-md-4 g-2"
+          class="item-card col-12 col-sm-6 col-md-4 g-2"
           th:each="surat : ${surat.data}"
         >
-          <div class="card shadow-sm p-2 bg-light hover">
+          <div class="card shadow-sm p-2 bg-light">
             <div
-              class="fw-semibold"
+              class="item-card__name fw-semibold"
               th:text="${surat.nomor} + '. ' + ${surat.namaLatin}"
             ></div>
             <div
@@ -70,5 +70,16 @@
     >
       © 2023 Sistem Informasi - Irvanudin
     </footer>
+    <!-- Back to top -->
+    <button
+      id="back-to-top"
+      class="btn btn-success btn-back-to-top"
+      title="Kembali ke atas"
+    >
+      <i class="fas fa-chevron-up"></i>
+    </button>
+    <!-- Script -->
+    <script th:src="@{/script.js}"></script>
+    <script th:src="@{/scripts/home.js}"></script>
   </body>
 </html>
