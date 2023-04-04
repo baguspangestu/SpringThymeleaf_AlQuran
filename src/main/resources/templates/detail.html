@@ -37,19 +37,15 @@
             ><i class="fa-regular fa-newspaper"></i> Tafsir
           </a>
           <div class="mx-1"></div>
-          <button
-            type="button"
-            class="btn btn-success mt-2"
-            onClick="window.location.reload()"
-          >
+          <button id="audio-btn" type="button" class="btn btn-success mt-2">
             <i class="fa-solid fa-play"></i> Audio
           </button>
           <div class="mx-1"></div>
-          <select class="form-select w-auto mt-2">
+          <select id="pilih-audio" class="form-select w-auto mt-2">
             <option disabled class="fw-bold">Pilih Audio</option>
             <option
               th:each="audio : ${detail.data.audioFull}"
-              th:value="${audio.value}"
+              th:value="${audio.key}"
               th:text="${audio.value.substring(audio.value.lastIndexOf('/', audio.value.lastIndexOf('/') - 1) + 1, audio.value.lastIndexOf('/')).replace('-', ' ')}"
             ></option>
           </select>
@@ -72,7 +68,12 @@
         th:each="ayat : ${detail.data.ayat}"
       >
         <div th:text="${detail.data.nomor} + ' : ' + ${ayat.nomorAyat}"></div>
-        <div class="fs-3 text-end my-2 arabic" th:text="${ayat.teksArab}"></div>
+        <div class="text-end my-2">
+          <button
+            class="btn arabic fs-3 text-end"
+            th:text="${ayat.teksArab}"
+          ></button>
+        </div>
         <div class="fw-semibold" th:text="${ayat.teksLatin}"></div>
         <hr style="margin: 2px" />
         <div th:text="${ayat.teksIndonesia}"></div>
@@ -128,6 +129,105 @@
     </button>
     <!-- Script -->
     <script th:src="@{/script.js}"></script>
-    <script th:src="@{/scripts/detail.js}"></script>
+    <script th:inline="javascript">
+      const audioBtn = document.getElementById("audio-btn");
+      const pilihAudio = document.getElementById("pilih-audio");
+      const pilihAyat = document.getElementById("pilih-ayat");
+      const ayats = document.querySelectorAll(".ayat");
+
+      const data = /*[[${detail.data}]]*/ "";
+
+      let audioKey = "01";
+
+      let audio = new Audio(data.audioFull[audioKey]);
+      let audi2 = new Audio(data.audioFull[audioKey]);
+
+      audioBtn.addEventListener("click", async () => {
+        // Pause Audi2
+        if (!audi2.paused) {
+          audi2.pause();
+          ayats.forEach((element) => {
+            const button = element.querySelector("button");
+            button.classList.remove("text-success");
+          });
+        }
+        // Play/Pause Audio
+        const audioIcon = audioBtn.querySelector("i");
+        if (audio.paused) {
+          audioIcon.classList.value = "fas fa-spinner fa-spin";
+          try {
+            await audio.play();
+            audioIcon.classList.value = "fas fa-pause";
+          } catch (error) {
+            audioIcon.classList.value = "fas fa-play";
+          }
+        } else {
+          audio.pause();
+          audioIcon.classList.value = "fas fa-play";
+        }
+
+        audio.onended = () => {
+          audioIcon.classList.value = "fas fa-play";
+        };
+
+        audio.onerror = () => {
+          audioIcon.classList.value = "fas fa-play";
+        };
+      });
+
+      pilihAudio.addEventListener("change", (event) => {
+        if (!audio.paused) audio.pause();
+        audioBtn.innerHTML = '<i class="fas fa-play"></i> Audio';
+        audioKey = event.target.value;
+        audio = new Audio(data.audioFull[audioKey]);
+      });
+
+      pilihAyat.addEventListener("change", (event) => {
+        const i = event.target.value - 1;
+        ayats[i].scrollIntoView({ block: "center" });
+      });
+
+      ayats.forEach((element) => {
+        const button = element.querySelector("button");
+        button.addEventListener("click", () => {
+          ayats.forEach((element, i) => {
+            const _button = element.querySelector("button");
+            if (_button === button) {
+              // Pause Audio Full
+              if (!audio.paused) {
+                audio.pause();
+                const audioIcon = audioBtn.querySelector("i");
+                audioIcon.classList.value = "fas fa-play";
+              }
+              // Play/Pause Audi2
+              const audioUrl = data.ayat[i].audio[audioKey];
+              if (audioUrl !== audi2.src) {
+                if (!audi2.paused) audi2.pause();
+                audi2 = new Audio(audioUrl);
+                audi2.play();
+              } else {
+                if (audi2.paused) {
+                  audi2.play();
+                } else {
+                  audi2.pause();
+                }
+              }
+
+              audi2.onended = () => {
+                _button.classList.remove("text-success");
+              };
+
+              audi2.onerror = () => {
+                _button.classList.remove("text-success");
+              };
+
+              _button.classList.toggle("text-success");
+            } else if (_button.classList.contains("text-success")) {
+              _button.classList.remove("text-success");
+            }
+          });
+        });
+      });
+    </script>
   </body>
 </html>
