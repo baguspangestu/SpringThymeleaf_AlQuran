@@ -25,15 +25,15 @@
       <div class="card p-2 text-center shadow-sm mb-2">
         <div
           class="fs-2 arabic fw-bold"
-          th:text="${detail.data.namaLatin} + ' • ' + ${detail.data.nama}"
+          th:text="${obj.data.namaLatin} + ' • ' + ${obj.data.nama}"
         ></div>
         <div
-          th:text="${detail.data.tempatTurun} + ' • ' + ${detail.data.arti} + ' • ' + ${detail.data.jumlahAyat} + ' Ayat'"
+          th:text="${obj.data.tempatTurun} + ' • ' + ${obj.data.arti} + ' • ' + ${obj.data.jumlahAyat} + ' Ayat'"
         ></div>
         <div class="d-flex flex-wrap justify-content-center">
           <a
             class="btn btn-success mt-2"
-            th:href="'/tafsir/' + ${detail.data.nomor}"
+            th:href="'/tafsir/' + ${obj.data.nomor}"
             ><i class="fa-regular fa-newspaper"></i> Tafsir
           </a>
           <div class="mx-1"></div>
@@ -44,7 +44,7 @@
           <select id="pilih-audio" class="form-select w-auto mt-2">
             <option disabled class="fw-bold">Pilih Audio</option>
             <option
-              th:each="audio : ${detail.data.audioFull}"
+              th:each="audio : ${obj.data.audioFull}"
               th:value="${audio.key}"
               th:text="${audio.value.substring(audio.value.lastIndexOf('/', audio.value.lastIndexOf('/') - 1) + 1, audio.value.lastIndexOf('/')).replace('-', ' ')}"
             ></option>
@@ -53,7 +53,7 @@
           <select id="pilih-ayat" class="form-select w-auto mt-2">
             <option disabled class="fw-bold">Pilih Ayat</option>
             <option
-              th:each="ayat : ${detail.data.ayat}"
+              th:each="ayat : ${obj.data.ayat}"
               th:value="${ayat.nomorAyat}"
               th:text="'Buka Ayat ' + ${ayat.nomorAyat}"
             ></option>
@@ -65,10 +65,14 @@
       </div>
       <div
         class="card ayat p-2 shadow-sm mb-2"
-        th:each="ayat : ${detail.data.ayat}"
+        th:each="ayat : ${obj.data.ayat}"
       >
-        <div th:text="${detail.data.nomor} + ' : ' + ${ayat.nomorAyat}"></div>
-        <div class="text-end my-2">
+        <div
+          class="fw-semibold"
+          th:text="${obj.data.nomor} + ' : ' + ${ayat.nomorAyat}"
+        ></div>
+        <br />
+        <div class="text-end mb-2">
           <button
             class="btn arabic fs-3 text-end"
             th:text="${ayat.teksArab}"
@@ -80,23 +84,23 @@
       </div>
       <div class="card p-2 shadow-sm mb-2">
         <div class="d-flex justify-content-between">
-          <th:block th:if="${detail.data.suratSebelumnya}">
+          <th:block th:if="${obj.data.suratSebelumnya}">
             <a
               class="btn btn-success"
-              th:href="'/detail/' + ${detail.data.suratSebelumnya.nomor}"
+              th:href="'/surat/' + ${obj.data.suratSebelumnya.nomor}"
               ><i class="fa-solid fa-left-long"></i>
               <span
-                th:text="${detail.data.suratSebelumnya.namaLatin} + ' • ' + ${detail.data.suratSebelumnya.nama}"
+                th:text="${obj.data.suratSebelumnya.namaLatin} + ' • ' + ${obj.data.suratSebelumnya.nama}"
               ></span
             ></a>
           </th:block>
           <div class="mx-1"></div>
-          <th:block th:if="${detail.data.suratSelanjutnya}">
+          <th:block th:if="${obj.data.suratSelanjutnya}">
             <a
               class="btn btn-success"
-              th:href="'/detail/' + ${detail.data.suratSelanjutnya.nomor}"
+              th:href="'/surat/' + ${obj.data.suratSelanjutnya.nomor}"
               ><span
-                th:text="${detail.data.suratSelanjutnya.namaLatin} + ' • ' + ${detail.data.suratSelanjutnya.nama}"
+                th:text="${obj.data.suratSelanjutnya.namaLatin} + ' • ' + ${obj.data.suratSelanjutnya.nama}"
               ></span>
               <i class="fa-solid fa-right-long"></i>
             </a>
@@ -135,10 +139,9 @@
       const pilihAyat = document.getElementById("pilih-ayat");
       const ayats = document.querySelectorAll(".ayat");
 
-      const data = /*[[${detail.data}]]*/ "";
+      const data = /*[[${obj.data}]]*/ "";
 
       let audioKey = "01";
-
       let audio = new Audio(data.audioFull[audioKey]);
       let audi2 = new Audio(data.audioFull[audioKey]);
 

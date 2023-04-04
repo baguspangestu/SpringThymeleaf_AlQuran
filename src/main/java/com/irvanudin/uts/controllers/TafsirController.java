@@ -3,31 +3,32 @@ package com.irvanudin.uts.controllers;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.irvanudin.uts.models.AllSuratModel;
+import com.irvanudin.uts.models.TafsirModel;
 import com.irvanudin.uts.services.QuranService;
 
 @Controller
-public class HomeController {
+public class TafsirController {
 
     private final QuranService quranService;
 
-    public HomeController(QuranService quranService) {
+    public TafsirController(QuranService quranService) {
         this.quranService = quranService;
     }
 
-    @GetMapping("/")
-    public String main(Model model) throws JsonProcessingException {
+    @GetMapping("/tafsir/{id}")
+    public String main(@PathVariable Long id, Model model) throws JsonProcessingException {
         // JsonString
-        String allSuratJString = quranService.getAllSurat();
+        String tafsirJString = quranService.getTafsir(id);
         // Json to Object
         ObjectMapper objectMapper = new ObjectMapper();
-        AllSuratModel allSuratObj = objectMapper.readValue(allSuratJString, AllSuratModel.class); 
+        TafsirModel tafsirObj = objectMapper.readValue(tafsirJString, TafsirModel.class); 
         // Add to Model
-        model.addAttribute("obj", allSuratObj);
+        model.addAttribute("obj", tafsirObj);
         // Return View
-        return "home";
+        return "tafsir";
     }
     
 }

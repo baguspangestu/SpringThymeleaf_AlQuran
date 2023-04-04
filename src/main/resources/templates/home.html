@@ -43,7 +43,7 @@
       <div class="row px-2">
         <div
           class="item-card col-12 col-sm-6 col-md-4 g-2"
-          th:each="surat : ${surat.data}"
+          th:each="surat : ${obj.data}"
         >
           <div class="card shadow-sm p-2 bg-light">
             <div
@@ -58,7 +58,7 @@
               class="text-end"
               th:text="${surat.tempatTurun} + ' • ' + ${surat.arti}"
             ></div>
-            <a th:href="'/detail/' + ${surat.nomor}" class="stretched-link"></a>
+            <a th:href="'/surat/' + ${surat.nomor}" class="stretched-link"></a>
           </div>
         </div>
       </div>

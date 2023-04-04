@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="id" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Jadwal Sholat & Imsak" />
+    <meta name="keywords" content="Jadwal, Sholat, Imsak, 2023" />
+    <title>Al-Quran Online | Irvanudin</title>
+    <link rel="icon" type="image/x-icon" th:href="@{/favicon.ico}" />
+    <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/webjars/font-awesome/6.3.0/css/all.min.css" />
+    <link rel="stylesheet" th:href="@{/style.css}" />
+  </head>
+  <body>
+    <!-- Head -->
+    <nav class="navbar navbar-dark bg-success sticky-top">
+      <div class="container">
+        <a class="navbar-brand m-0 h1 fw-bold" href="/"
+          ><i class="fa-solid fa-book-quran"></i> Al-Qur'an Online</a
+        >
+      </div>
+    </nav>
+    <!-- Content -->
+    <div class="container my-4">
+      <div class="card p-2 text-center shadow-sm mb-2">
+        <div
+          class="fs-2 arabic fw-bold"
+          th:text="${obj.data.namaLatin} + ' • ' + ${obj.data.nama}"
+        ></div>
+        <div
+          th:text="${obj.data.tempatTurun} + ' • ' + ${obj.data.arti} + ' • ' + ${obj.data.jumlahAyat} + ' Ayat'"
+        ></div>
+        <div class="d-flex flex-wrap justify-content-center">
+          <a
+            class="btn btn-success mt-2"
+            th:href="'/surat/' + ${obj.data.nomor}"
+            ><i class="fa-regular fa-newspaper"></i> Surat
+          </a>
+          <div class="mx-1"></div>
+          <select id="pilih-ayat" class="form-select w-auto mt-2">
+            <option disabled class="fw-bold">Pilih Ayat</option>
+            <option
+              th:each="tafsir : ${obj.data.tafsir}"
+              th:value="${tafsir.ayat}"
+              th:text="'Buka Ayat ' + ${tafsir.ayat}"
+            ></option>
+          </select>
+        </div>
+      </div>
+      <div
+        class="card ayat p-2 shadow-sm mb-2"
+        th:each="tafsir : ${obj.data.tafsir}"
+      >
+        <div
+          class="fw-semibold"
+          th:text="${obj.data.nomor} + ' : ' + ${tafsir.ayat}"
+        ></div>
+        <br />
+        <div style="white-space: pre-line" th:text="${tafsir.teks}"></div>
+      </div>
+      <div class="card p-2 shadow-sm mb-2">
+        <div class="d-flex justify-content-between">
+          <th:block th:if="${obj.data.suratSebelumnya}">
+            <a
+              class="btn btn-success"
+              th:href="'/tafsir/' + ${obj.data.suratSebelumnya.nomor}"
+              ><i class="fa-solid fa-left-long"></i>
+              <span
+                th:text="${obj.data.suratSebelumnya.namaLatin} + ' • ' + ${obj.data.suratSebelumnya.nama}"
+              ></span
+            ></a>
+          </th:block>
+          <div class="mx-1"></div>
+          <th:block th:if="${obj.data.suratSelanjutnya}">
+            <a
+              class="btn btn-success"
+              th:href="'/tafsir/' + ${obj.data.suratSelanjutnya.nomor}"
+              ><span
+                th:text="${obj.data.suratSelanjutnya.namaLatin} + ' • ' + ${obj.data.suratSelanjutnya.nama}"
+              ></span>
+              <i class="fa-solid fa-right-long"></i>
+            </a>
+          </th:block>
+        </div>
+      </div>
+    </div>
+    <!-- Footer -->
+    <div style="height: 50px"></div>
+    <footer
+      class="fixed-bottom d-flex align-items-center justify-content-center"
+      style="background-color: #d1e7dd; height: 50px"
+    >
+      <div class="text-center my-auto">© 2023 Sistem Informasi - Irvanudin</div>
+    </footer>
+    <!-- Back to top -->
+    <button
+      id="back-to-top"
+      class="btn btn-success btn-back-to-top"
+      style="
+        position: fixed;
+        bottom: 70px;
+        right: 20px;
+        z-index: 9999;
+        display: none;
+      "
+      title="Kembali ke atas"
+    >
+      <i class="fas fa-chevron-up"></i>
+    </button>
+    <!-- Script -->
+    <script th:src="@{/script.js}"></script>
+    <script th:inline="javascript">
+      const pilihAyat = document.getElementById("pilih-ayat");
+      const ayats = document.querySelectorAll(".ayat");
+
+      const data = /*[[${obj.data}]]*/ "";
+      console.log(data.tafsir[0].teks);
+
+      pilihAyat.addEventListener("change", (event) => {
+        const i = event.target.value - 1;
+        ayats[i].scrollIntoView({ block: "center" });
+      });
+    </script>
+  </body>
+</html>

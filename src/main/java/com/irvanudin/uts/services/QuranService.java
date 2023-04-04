@@ -15,19 +15,19 @@ public class QuranService {
 
     private String root = "https://equran.id/api/v2";
 
-    public String getSurat() {
+    public String getAllSurat() {
       String url = root + "/surat";
       ResponseEntity<String> response = restTemplate.getForEntity(url, String.class);
       return response.getBody();
     }
     
-    public String getDetailSurat(Number nomor) {
+    public String getSurat(Number nomor) {
       String url =  root + "/surat/" + nomor;
       ResponseEntity<String> response = restTemplate.getForEntity(url, String.class);
       return response.getBody();
     }
 
-    public String getDetailTafsir(Number nomor) {
+    public String getTafsir(Number nomor) {
       String url =  root + "/tafsir/" + nomor;
       ResponseEntity<String> response = restTemplate.getForEntity(url, String.class);
       return response.getBody();

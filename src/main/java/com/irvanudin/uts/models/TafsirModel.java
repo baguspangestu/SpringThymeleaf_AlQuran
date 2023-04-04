@@ -3,7 +3,7 @@ package com.irvanudin.uts.models;
 import java.util.List;
 import java.util.Map;
 
-public class DetailSuratModel {
+public class TafsirModel {
     private int code;
     private String message;
     private Data data;
@@ -41,7 +41,7 @@ public class DetailSuratModel {
         private String arti;
         private String deskripsi;
         private Map<String, String> audioFull;
-        private List<Ayat> ayat;
+        private List<Tafsir> tafsir;
         private Object suratSelanjutnya;
         private Object suratSebelumnya;
     
@@ -109,12 +109,12 @@ public class DetailSuratModel {
             this.audioFull = audioFull;
         }
     
-        public List<Ayat> getAyat() {
-            return ayat;
+        public List<Tafsir> getTafsir() {
+            return tafsir;
         }
     
-        public void setAyat(List<Ayat> ayat) {
-            this.ayat = ayat;
+        public void setTafsir(List<Tafsir> tafsir) {
+            this.tafsir = tafsir;
         }
     
         public Object getSuratSelanjutnya() {
@@ -134,52 +134,24 @@ public class DetailSuratModel {
         }
     }
 
-    public static class Ayat {
-        private int nomorAyat;
-        private String teksArab;
-        private String teksLatin;
-        private String teksIndonesia;
-        private Map<String, String> audio;
+    public static class Tafsir {
+        private int ayat;
+        private String teks;
     
-        public int getNomorAyat() {
-            return nomorAyat;
+        public int getAyat() {
+            return ayat;
         }
     
-        public void setNomorAyat(int nomorAyat) {
-            this.nomorAyat = nomorAyat;
+        public void setAyat(int ayat) {
+            this.ayat = ayat;
         }
     
-        public String getTeksArab() {
-            return teksArab;
+        public String getTeks() {
+            return teks;
         }
     
-        public void setTeksArab(String teksArab) {
-            this.teksArab = teksArab;
-        }
-    
-        public String getTeksLatin() {
-            return teksLatin;
-        }
-    
-        public void setTeksLatin(String teksLatin) {
-            this.teksLatin = teksLatin;
-        }
-    
-        public String getTeksIndonesia() {
-            return teksIndonesia;
-        }
-    
-        public void setTeksIndonesia(String teksIndonesia) {
-            this.teksIndonesia = teksIndonesia;
-        }
-    
-
-        public Map<String, String> getAudio() {
-            return audio;
-        }
-
-        public void setAudio(Map<String, String> audio) {
-            this.audio = audio;
+        public void setTeks(String teks) {
+            this.teks = teks;
         }
     }
 }
