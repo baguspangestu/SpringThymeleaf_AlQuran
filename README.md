@@ -1,4 +1,4 @@
-# 📆 JADWAl SHOLAT & IMSAKIYAH RAMADHAN 2023
+# 📗 AL-QUR'AN ONLINE
 
 Aplikasi Al-Qur'an Online sebagai UTS kuliah S1 Sistem Informasi ITBA DCC Pringsewu 2022 dengan Bahasa Pemrograman Java dan Framework Spring Boot + Thymeleaf.
 
