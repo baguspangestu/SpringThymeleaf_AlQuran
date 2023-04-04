@@ -24,19 +24,55 @@
     <div class="container my-4">
       <div class="card p-2 text-center shadow-sm mb-2">
         <div
-          class="fs-2 ayat fw-bold"
+          class="fs-2 arabic fw-bold"
           th:text="${detail.data.namaLatin} + ' • ' + ${detail.data.nama}"
         ></div>
         <div
           th:text="${detail.data.tempatTurun} + ' • ' + ${detail.data.arti} + ' • ' + ${detail.data.jumlahAyat} + ' Ayat'"
         ></div>
+        <div class="d-flex flex-wrap justify-content-center">
+          <a
+            class="btn btn-success mt-2"
+            th:href="'/tafsir/' + ${detail.data.nomor}"
+            ><i class="fa-regular fa-newspaper"></i> Tafsir
+          </a>
+          <div class="mx-1"></div>
+          <button
+            type="button"
+            class="btn btn-success mt-2"
+            onClick="window.location.reload()"
+          >
+            <i class="fa-solid fa-play"></i> Audio
+          </button>
+          <div class="mx-1"></div>
+          <select class="form-select w-auto mt-2">
+            <option disabled class="fw-bold">Pilih Audio</option>
+            <option
+              th:each="audio : ${detail.data.audioFull}"
+              th:value="${audio.value}"
+              th:text="${audio.value.substring(audio.value.lastIndexOf('/', audio.value.lastIndexOf('/') - 1) + 1, audio.value.lastIndexOf('/')).replace('-', ' ')}"
+            ></option>
+          </select>
+          <div class="mx-1"></div>
+          <select id="pilih-ayat" class="form-select w-auto mt-2">
+            <option disabled class="fw-bold">Pilih Ayat</option>
+            <option
+              th:each="ayat : ${detail.data.ayat}"
+              th:value="${ayat.nomorAyat}"
+              th:text="'Buka Ayat ' + ${ayat.nomorAyat}"
+            ></option>
+          </select>
+        </div>
       </div>
       <div class="card p-2 text-center shadow-sm mb-2">
-        <div class="fs-3 ayat p-2">بِسْمِ اللهِ الرَّحْمَنِ الرَّحِيْمِ</div>
+        <div class="fs-3 arabic p-2">بِسْمِ اللهِ الرَّحْمَنِ الرَّحِيْمِ</div>
       </div>
-      <div class="card p-2 shadow-sm mb-2" th:each="ayat : ${detail.data.ayat}">
+      <div
+        class="card ayat p-2 shadow-sm mb-2"
+        th:each="ayat : ${detail.data.ayat}"
+      >
         <div th:text="${detail.data.nomor} + ' : ' + ${ayat.nomorAyat}"></div>
-        <div class="fs-3 text-end my-2 ayat" th:text="${ayat.teksArab}"></div>
+        <div class="fs-3 text-end my-2 arabic" th:text="${ayat.teksArab}"></div>
         <div class="fw-semibold" th:text="${ayat.teksLatin}"></div>
         <hr style="margin: 2px" />
         <div th:text="${ayat.teksIndonesia}"></div>
@@ -45,7 +81,6 @@
         <div class="d-flex justify-content-between">
           <th:block th:if="${detail.data.suratSebelumnya}">
             <a
-              type="button"
               class="btn btn-success"
               th:href="'/detail/' + ${detail.data.suratSebelumnya.nomor}"
               ><i class="fa-solid fa-left-long"></i>
@@ -54,10 +89,9 @@
               ></span
             ></a>
           </th:block>
-          <div></div>
+          <div class="mx-1"></div>
           <th:block th:if="${detail.data.suratSelanjutnya}">
             <a
-              type="button"
               class="btn btn-success"
               th:href="'/detail/' + ${detail.data.suratSelanjutnya.nomor}"
               ><span
@@ -94,5 +128,6 @@
     </button>
     <!-- Script -->
     <script th:src="@{/script.js}"></script>
+    <script th:src="@{/scripts/detail.js}"></script>
   </body>
 </html>

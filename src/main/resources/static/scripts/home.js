@@ -1,12 +1,15 @@
 const search = document.getElementById("search");
 
 search.addEventListener("input", (event) => {
-  const value = event.target.value;
+  const value = removeSpecialChars(event.target.value);
   const items = document.querySelectorAll(".item-card");
+
   if (items.length > 0) {
     items.forEach((item) => {
-      const name = item.querySelector(".item-card__name").innerText;
-      if (name.toLowerCase().indexOf(value.toLowerCase()) > -1) {
+      const name = removeSpecialChars(
+        item.querySelector(".item-card__name").innerText
+      );
+      if (name.indexOf(value) > -1) {
         item.style.display = "block";
       } else {
         item.style.display = "none";
@@ -14,3 +17,9 @@ search.addEventListener("input", (event) => {
     });
   }
 });
+
+const removeSpecialChars = (value) =>
+  value
+    .replace(/[^\w\s]|_/gi, "")
+    .replace(/\s+/g, "")
+    .toLowerCase();
