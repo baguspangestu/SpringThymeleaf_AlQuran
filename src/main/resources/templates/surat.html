@@ -182,10 +182,16 @@
 
       pilihAudio.addEventListener("change", (event) => {
         if (!audio.paused) audio.pause();
-        if (!audi2.paused) audi2.pause();
         audioBtn.innerHTML = '<i class="fas fa-play"></i> Audio';
         audioKey = event.target.value;
         audio = new Audio(data.audioFull[audioKey]);
+        if (!audi2.paused) {
+          audi2.pause();
+          ayats.forEach((element) => {
+            const button = element.querySelector("button");
+            button.classList.remove("text-success");
+          });
+        }
       });
 
       pilihAyat.addEventListener("change", (event) => {
