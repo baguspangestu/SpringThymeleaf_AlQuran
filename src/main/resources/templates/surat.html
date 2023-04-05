@@ -182,6 +182,7 @@
 
       pilihAudio.addEventListener("change", (event) => {
         if (!audio.paused) audio.pause();
+        if (!audi2.paused) audi2.pause();
         audioBtn.innerHTML = '<i class="fas fa-play"></i> Audio';
         audioKey = event.target.value;
         audio = new Audio(data.audioFull[audioKey]);
