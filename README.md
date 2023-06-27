@@ -1,6 +1,6 @@
 # 📗 AL-QUR'AN ONLINE
 
-Aplikasi Al-Qur'an Online sebagai UTS kuliah S1 Sistem Informasi ITBA DCC Pringsewu 2022 dengan Bahasa Pemrograman Java dan Framework Spring Boot + Thymeleaf.
+Aplikasi Al-Qur'an Online sebagai UTS kuliah S1 Sistem Informasi ITBA DCC Pringsewu 2023 dengan Bahasa Pemrograman Java dan Framework Spring Boot + Thymeleaf.
 
 Home
 ![Screenshot](screenshot1.png)
